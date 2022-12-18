@@ -19,7 +19,8 @@ export default {
         'color':'#f00',
         'background-color':'#eee',
         'fontSize':'12px',
-        'border-radius':'5px'
+        'border-radius':'5px',
+        'opacity':0.4
       }
     }
   },
@@ -38,6 +39,7 @@ export default {
   height: 300px;
   width: 500px;
   position: relative;
+  background-image: url("https://heheo.xyz/download/images/10001.jpg");
   top: 100px;
   left: 100px;
   border: 1px solid #42b983;
