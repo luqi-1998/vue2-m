@@ -9,7 +9,7 @@
       <div class="big-com" :style="fatherStyle">
             <vue-drag-resize v-for="(item,index) in comList" :key="index"
                @dragging="(point)=>{return draggingEvent(point,index)}" @clicked="(point)=>{return clickedEvent(point,index)}"
-               @resizing="(point)=>{return resizeEvent(point,index)}" :minw="30" :x="item.left/2" :y="item.top/2" :w="item.width/2" :h="item.height/2"
+               @resizing="(point)=>{return resizeEvent(point,index)}" :minw="30" :x="item.left/2" :y="item.top/2" :w="item.width/2" :parentH="imgObg.height/2" :parentW="imgObg.width/2" :h="item.height/2"
                :minh="30" :parentLimitation="true" :preventActiveBehavior="false"
                @dragstop="(point)=>{return dragEvent(point,index)}" @resizestop="(point)=>{return resizestopEvent(point,index)}">
               <div class="resize-item" :style="item|filterStyle">{{ item.title }}</div>
@@ -20,28 +20,28 @@
           <el-button  icon="el-icon-plus" @click="addButton">添加按钮</el-button>
         </div>
         <div class="com-form">
-          <el-form :model="form" label-width="80px">
+          <el-form  :model="form" label-width="80px">
             <el-row :gutter="20">
               <el-col :span="12">
                 <el-form-item label="宽:">
-                  <el-input-number size="small" v-model="form.width" :step="1" controls-position="right" :min="60" :max="imgObg.width" ></el-input-number>
+                  <el-input  size="small" v-model="form.width" ></el-input>
                 </el-form-item>
               </el-col>
               <el-col :span="12">
                 <el-form-item label="高:">
-                  <el-input-number size="small" v-model="form.height" :step="1" controls-position="right" :min="60" :max="imgObg.height"></el-input-number>
+                  <el-input size="small" v-model="form.height"></el-input>
                 </el-form-item>
               </el-col>
             </el-row>
           <el-row :gutter="20">
             <el-col :span="12">
               <el-form-item label="距顶部:">
-                <el-input-number size="small" v-model="form.top" :step="1" controls-position="right" :min="0"  ></el-input-number>
+                <el-input size="small" v-model="form.top"></el-input>
               </el-form-item>
             </el-col>
             <el-col :span="12">
               <el-form-item label="距左边:">
-                <el-input-number size="small" v-model="form.left" :step="1" controls-position="right" :min="0" ></el-input-number>
+                <el-input size="small" v-model="form.left"></el-input>
               </el-form-item>
             </el-col>
           </el-row>
@@ -126,7 +126,8 @@ export  default {
       return {
         'width':this.imgObg.width/2+'px',
         'height':this.imgObg.height/2+'px',
-        'backgroundImage':`url(${this.imgObg.url})`
+        'backgroundImage':`url(${this.imgObg.url})`,
+        'backgroundSize':`${this.imgObg.width/2+'px'} ${this.imgObg.height/2+'px'}`
       }
     }
   },
@@ -147,7 +148,18 @@ export  default {
         }
       ],
       activeIndex:0,
-      form:{}
+      form:{
+        top:0,
+        left:0,
+        height:100,
+        width:200,
+        opacity:80,
+        color:'#f00',
+        backgroundColor:'#eee',
+        fontSize:12,
+        title:'按钮',
+        link:''
+      }
     }
   },
   filters:{
@@ -200,6 +212,7 @@ export  default {
     },
     // 组件缩放事件
     resizeEvent(e,index){
+      console.log(e,index)
       this.activeIndex=index
       this.form=JSON.parse(JSON.stringify(this.comList[this.activeIndex]))
       this.comList[index].width=e.width*2
@@ -222,8 +235,8 @@ export  default {
 }
 .big-com{
   position: relative;
-  background-repeat: no-repeat no-repeat;
-  background-size: 100% 100%;
+  /*background-repeat: no-repeat no-repeat;*/
+  /*background-size: 100% 100%;*/
 }
 .resize-item{
   text-align: center;
