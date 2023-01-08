@@ -1,15 +1,16 @@
 <template>
   <div class="box">
-    <vue-drag-resize @resizing="resizeEvent" :minw="30" :w="100" :h="50" :minh="30" :parentLimitation="true" :preventActiveBehavior="false" @dragstop="dragEvent">
-      <div :style="styleObj">点击</div>
-    </vue-drag-resize>
+<!--    <vue-drag-resize @resizing="resizeEvent" :minw="30" :w="100" :h="50" :minh="30" :parentLimitation="true" :preventActiveBehavior="false" @dragstop="dragEvent">-->
+<!--      <div :style="styleObj">点击</div>-->
+<!--    </vue-drag-resize>-->
+    <router-view></router-view>
   </div>
 </template>
 <script>
-import VueDragResize from "vue-drag-resize";
+// import VueDragResize from "vue-drag-resize";
 export default {
   components:{
-    VueDragResize
+    // VueDragResize
   },
   data(){
     return {
@@ -39,9 +40,11 @@ export default {
   height: 300px;
   width: 500px;
   position: relative;
-  background-image: url("https://heheo.xyz/download/images/10001.jpg");
+  /*background-image: url("https://heheo.xyz/download/images/10001.jpg");*/
+  background-repeat: no-repeat;
+  background-size: 100%;
   top: 100px;
   left: 100px;
-  border: 1px solid #42b983;
+  /*border: 1px solid #42b983;*/
 }
 </style>
