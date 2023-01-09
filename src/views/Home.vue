@@ -7,17 +7,18 @@
 
 <script>
 import myBox from "@/components/my-box.vue";
+
 export default {
-  name:'Home',
-  components:{myBox},
-  data(){
+  name: 'Home',
+  components: {myBox},
+  data() {
     return {
-      open:false
+      open: false
     }
   },
-  methods:{
-    handleOpen(){
-      this.open=true
+  methods: {
+    handleOpen() {
+      this.open = true
     }
   }
 }
